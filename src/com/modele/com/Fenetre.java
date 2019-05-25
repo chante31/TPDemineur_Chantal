@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import com.modele.com.Fenetre.Grille;
 
 public class Fenetre extends JFrame {
-//ceci est un commentaire	
+//ceci est un commentaire d'essai	
 	public Fenetre() {
 		this.setTitle("DEMINEUR");
 		this.setSize(1200,800);
