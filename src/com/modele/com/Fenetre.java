@@ -31,7 +31,7 @@ int spacing=5;
 		this.setVisible(true);
 		this.setResizable(false);
 
-
+		
 				
 		Grille grille =new Grille();
 		this.setContentPane(grille);//
