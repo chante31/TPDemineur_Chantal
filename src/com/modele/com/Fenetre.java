@@ -2,6 +2,9 @@ package com.modele.com;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -53,11 +56,63 @@ int spacing=5;
 					
 					g.fillRect(spacing +i*80,spacing +j*80+80, 80-2*spacing,80-2*spacing);
 				}
-			}
-			
-			
+			}		
 			
 		}
 		
+	
+	public class bouger implements MouseMotionListener{
+
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+		
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+
+		public class Click implements MouseListener{
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}
+			
 	}
+		
+	}
+
+
 }
