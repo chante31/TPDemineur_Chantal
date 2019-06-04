@@ -6,10 +6,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.modele.com.Fenetre.Grille;
+
+
 
 public class Fenetre extends JFrame {
 /**
@@ -17,6 +19,8 @@ public class Fenetre extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 int spacing=5;
+int mx = -100;
+int my= -100;
 
 	//ceci est un commentaire d'essai	
 	public Fenetre() {
@@ -38,6 +42,13 @@ int spacing=5;
 				
 		Grille grille =new Grille();
 		this.setContentPane(grille);//
+		
+		Bouger bouger= new Bouger();
+		this.addMouseMotionListener(bouger);
+		
+		Click click = new Click();
+		this.addMouseListener(click);
+		
 	}
 
 
@@ -59,9 +70,10 @@ int spacing=5;
 			}		
 			
 		}
+	}
 		
 	
-	public class bouger implements MouseMotionListener{
+	public class Bouger implements MouseMotionListener{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
@@ -70,17 +82,21 @@ int spacing=5;
 		}
 
 		@Override
-		public void mouseMoved(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+		public void mouseMoved(MouseEvent e) {
+			System.out.println("Votre souris a bougé");
+			mx= e.getX();
+			my = e.getY();
+			System.out.println("X: " + mx+",Y: "+ my);
 			
 		}
+	}
 		
 
 		public class Click implements MouseListener{
 
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("la souris a été  cliquée");
 				
 			}
 
@@ -106,13 +122,10 @@ int spacing=5;
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
-			}
-			
-		}
-			
-	}
+			}		
+	
 		
 	}
 
+	}
 
-}
