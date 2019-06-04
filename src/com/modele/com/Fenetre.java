@@ -6,19 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
-
-
 public class Fenetre extends JFrame {
 /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-int spacing=5;
+int espace=5;
 int mx = -100;
 int my= -100;
 
@@ -59,13 +54,17 @@ int my= -100;
 		private static final long serialVersionUID = 1L;
 
 		public void paintComponent(Graphics g) {
-			g.setColor(Color.red);
-			g.fillRect(0, 0, 1200, 800);
 			g.setColor(Color.DARK_GRAY);
+			g.fillRect(0, 0, 1220, 830);
+			
 			for (int i =0;i<16; i++) {
 				for (int j=0 ; j<9; j++) {
-					
-					g.fillRect(spacing +i*80,spacing +j*80+80, 80-2*spacing,80-2*spacing);
+					g.setColor(Color.GRAY);
+					if(mx>= espace+i*80 && mx < i*80+80-2 * espace&& my>= espace+j*80+80+26
+							&&my<espace+j*80+80+80-2*espace ) {
+						g.setColor(Color.red);
+					}
+					g.fillRect(espace +i*80,espace +j*80+80, 80-2*espace,80-2*espace);
 				}
 			}		
 			
@@ -84,7 +83,7 @@ int my= -100;
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			System.out.println("Votre souris a bougé");
-			mx= e.getX();
+			mx = e.getX();
 			my = e.getY();
 			System.out.println("X: " + mx+",Y: "+ my);
 			
