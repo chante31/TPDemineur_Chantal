@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +17,12 @@ public class Fenetre extends JFrame {
 int espace=5;
 int mx = -100;
 int my= -100;
-
+Random rand = new Random();
+int [][]mines=new int[16][9];
+int [][] case_voisine =new int[16][9];
+boolean [][] revélé= new boolean[16][9];
+boolean [][] Flagges = new boolean[16][9];
+///int doge = rand.nextInt(5);
 	//ceci est un commentaire d'essai	
 	public Fenetre() {
 		this.setTitle("DEMINEUR");
@@ -33,7 +39,17 @@ int my= -100;
 		this.setVisible(true);
 		this.setResizable(false);
 
-		
+		for (int i =0;i<16; i++) {
+			for (int j=0 ; j<9; j++) {
+				if (rand.nextInt(100)< 20) {
+					mines[i][j] =1;
+					
+				}else {
+					mines[i][j]=0;
+					
+				}
+			}
+		}
 				
 		Grille grille =new Grille();
 		this.setContentPane(grille);//
@@ -60,8 +76,9 @@ int my= -100;
 			for (int i =0;i<16; i++) {
 				for (int j=0 ; j<9; j++) {
 					g.setColor(Color.GRAY);
-					if(mx>= espace+i*80 && mx < i*80+80-2 * espace&& my>= espace+j*80+80+26
-							&&my<espace+j*80+80+80-2*espace ) {
+					if (mines[i][j]== 1) {
+					g.setColor(Color.yellow);}
+					if(mx>= espace+i*80 && mx < i*80+80-espace && my>= espace+j*80+106 && my< j*80+186-espace) {
 						g.setColor(Color.red);
 					}
 					g.fillRect(espace +i*80,espace +j*80+80, 80-2*espace,80-2*espace);
@@ -95,7 +112,10 @@ int my= -100;
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("la souris a été  cliquée");
+			
+				if(DanslaboiteX()!=1 && DanslaboiteY()!=1) {
+					System.out.println("la souris est dans le [" +DanslaboiteX()+ ","+DanslaboiteY()+"]");
+				}
 				
 			}
 
@@ -125,6 +145,27 @@ int my= -100;
 	
 		
 	}
+		
+		public int DanslaboiteX() {
+			for (int i =0;i<16; i++) {
+				for (int j=0 ; j<9; j++) {
+					if(mx>= espace+i*80 && mx < i*80+80-espace && my>= espace+j*80+106 && my< j*80+186-espace) {
+						return i;
+					}
+				}
+			}
+			return -1;
+		}
+		public int DanslaboiteY() {
+			for (int i =0;i<16; i++) {
+				for (int j=0 ; j<9; j++) {
+					if(mx>= espace+i*80 && mx < i*80+80-espace && my>= espace+j*80+106 && my< j*80+186-espace) {
+						return j;
+					}
+				}
+			}
+			return -1;
+		}
 
 	}
 
