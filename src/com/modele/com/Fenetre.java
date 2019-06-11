@@ -22,6 +22,7 @@ int [][]mines=new int[16][9];
 int [][] case_voisine =new int[16][9];
 boolean [][] revélé= new boolean[16][9];
 boolean [][] Flagges = new boolean[16][9];
+int voisin=0;
 ///int doge = rand.nextInt(5);
 	//ceci est un commentaire d'essai	
 	public Fenetre() {
@@ -48,10 +49,30 @@ boolean [][] Flagges = new boolean[16][9];
 					mines[i][j]=0;
 					
 				}
+				revélé[i][j]=false;
 			}
 		}
+		
+		for (int i =0;i<16; i++) {
+			for (int j=0 ; j<9; j++) {
+				for (int m =0;m<16; m++) {
+					for (int n=0 ; n<9; n++) {
+						if(!(m==i && n==j))
+						if(isN(i,j,m,n)==true)
+							voisin++;
+						
+					
+			      }
+					
+				}
+				case_voisine[i][j]=voisin;
+			}
+		}
+		
+		
 				
 		Grille grille =new Grille();
+		// on relie la grille à notre fenetre
 		this.setContentPane(grille);//
 		
 		Bouger bouger= new Bouger();
@@ -62,7 +83,10 @@ boolean [][] Flagges = new boolean[16][9];
 		
 	}
 
-
+	/**
+	 * Tout ce qu'on mettra dans cette méthode va 
+	 * apparaitre dans notre fenetre 
+	 */
 	public class Grille extends JPanel{
 		/**
 		 * 
@@ -76,10 +100,13 @@ boolean [][] Flagges = new boolean[16][9];
 			for (int i =0;i<16; i++) {
 				for (int j=0 ; j<9; j++) {
 					g.setColor(Color.GRAY);
+					/**
+					 * s'il y'a une mine, la case doit être égale à 1 et coloré en jaune.
+					 */		
 					if (mines[i][j]== 1) {
 					g.setColor(Color.yellow);}
 					if(mx>= espace+i*80 && mx < i*80+80-espace && my>= espace+j*80+106 && my< j*80+186-espace) {
-						g.setColor(Color.red);
+						g.setColor(Color.green);
 					}
 					g.fillRect(espace +i*80,espace +j*80+80, 80-2*espace,80-2*espace);
 				}
@@ -99,10 +126,11 @@ boolean [][] Flagges = new boolean[16][9];
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			System.out.println("Votre souris a bougé");
+			
 			mx = e.getX();
 			my = e.getY();
-			System.out.println("X: " + mx+",Y: "+ my);
+			/*System.out.println("Votre souris a bougé");
+			System.out.println("X: " + mx+",Y: "+ my);*/
 			
 		}
 	}
@@ -112,9 +140,17 @@ boolean [][] Flagges = new boolean[16][9];
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
-				if(DanslaboiteX()!=1 && DanslaboiteY()!=1) {
-					System.out.println("la souris est dans le [" +DanslaboiteX()+ ","+DanslaboiteY()+"]");
+				if (DanslaboiteX()!=-1 && DanslaboiteY()!=-1) {
+				revélé[DanslaboiteX()][DanslaboiteY()]=true;
+				}
+				if(DanslaboiteX()!=-1 && DanslaboiteY()!=-1) {
+					
+					
+					// code à revoir 
+					System.out.println("la souris est dans le [" +DanslaboiteX()+ ","+DanslaboiteY()+"],Nombrede mines voisine:" 
+				+ case_voisine[DanslaboiteX()][DanslaboiteY()]);
+				}else {
+					System.out.println(" le pointeur n'est pas dans la boite");
 				}
 				
 			}
@@ -166,6 +202,13 @@ boolean [][] Flagges = new boolean[16][9];
 			}
 			return -1;
 		}
-
+		public boolean isN(int mX,int mY, int cX, int cY) {
+			if ((mX-cX<2) &&( mX - cX > -2) && (mY - cY<2) && (mY - cY<-2)&&mines[cX][cY]==1) {
+			return true;
+			}
+			return false;
+		}
+			
 	}
+	
 
