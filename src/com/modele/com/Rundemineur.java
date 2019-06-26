@@ -26,7 +26,7 @@ public void run() {
 	fenetre.repaint();
 	if (fenetre.resetter==false) {
 		fenetre.EtatduJeu();
-		System.out.println(" La vitoire" +fenetre.victoire+", defaite "+fenetre.defaite);
+//		System.out.println(" La vitoire" +fenetre.victoire+", defaite "+fenetre.defaite);
 	}
 	}
 }
